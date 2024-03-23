@@ -1,3 +1,6 @@
+To make the website more screen-friendly, I'll introduce some responsive design techniques using media queries. This ensures that the website layout adapts gracefully to different screen sizes.
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,7 +43,8 @@
             background-color: #555;
             color: #fff;
         }
-        .login-container {
+        .form-container {
+            display: none;
             width: 40%;
             margin: auto;
             background-color: #fff;
@@ -49,7 +53,7 @@
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
             margin-top: 50px;
         }
-        input[type="text"], input[type="password"], input[type="submit"] {
+        input[type="text"], input[type="password"], input[type="submit"], input[type="email"], input[type="date"], select {
             width: 100%;
             margin-bottom: 10px;
             padding: 10px;
@@ -64,6 +68,70 @@
         input[type="submit"]:hover {
             background-color: #555;
         }
+
+        /* CSS for additional content */
+        .welcome-section {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .welcome-section h2 {
+            color: #333;
+        }
+        .about-cricket {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .about-cricket img {
+            width: 80%;
+            max-width: 400px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .about-cricket p {
+            text-align: justify;
+        }
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .card {
+            flex: 1;
+            max-width: 300px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Media queries for responsiveness */
+        @media screen and (max-width: 768px) {
+            .form-container {
+                width: 80%;
+            }
+            .about-cricket img {
+                width: 100%;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .form-container {
+                width: 90%;
+            }
+            .card {
+                flex: 1 1 90%;
+                max-width: 90%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -72,12 +140,30 @@
     </header>
     <div class="container">
         <nav>
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Events</a>
-            <a href="#">Contact</a>
+            <a href=>Home</a>
+            <a href="about.html">About</a>
+            <a href="event.html">Event</a>
+            <a href="#" id="signupBtn">Signup</a>
+            <a href="#" id="loginBtn">Login</a>
         </nav>
-        <div class="login-container">
+        <div class="form-container" id="signupForm">
+            <h2>Sign Up</h2>
+            <form action="signup.php" method="POST">
+                <input type="text" name="username" placeholder="Username" required><br>
+                <input type="email" name="email" placeholder="Email" required><br>
+                <input type="password" name="password" placeholder="Password" required><br>
+                <input type="date" name="dob" required><br>
+                <select name="country" required>
+                    <option value="" disabled selected>Select your country</option>
+                    <option value="india">India</option>
+                    <option value="australia">Australia</option>
+                    <option value="england">England</option>
+                    <!-- Add more options as needed -->
+                </select><br>
+                <input type="submit" value="Sign Up">
+            </form>
+        </div>
+        <div class="form-container" id="loginForm">
             <h2>Login</h2>
             <form action="login.php" method="POST">
                 <input type="text" name="username" placeholder="Username" required><br>
@@ -85,6 +171,35 @@
                 <input type="submit" value="Login">
             </form>
         </div>
+
+        <!-- Additional content -->
+        <div class="welcome-section">
+            <h2>Welcome to Cricket Club</h2>
+            <p>Welcome to the Cricket Club where we celebrate the spirit of cricket!</p>
+        </div>
+        <div class="about-cricket">
+            <img src="my image.jpg" alt="Cricket Image">
+            <p><b>High-Quality Materials:</b> Our cricket products are crafted using high-quality materials to ensure durability and performance on the field.</p>
+        </div>
+        <div class="card-container">
+            <div class="card">
+                <h3>Upcoming Events</h3>
+                <p>Check out our upcoming cricket events.</p>
+            </div>
+            <div class="card">
+                <h3>About Us</h3>
+                <p>Learn more about our cricket club and our mission.</p>
+            </div>
+            <div class="card">
+                <h3>Upcoming Events</h3>
+                <p>Check out our upcoming cricket events.</p>
+            </div>
+            <div class="card">
+                <h3>Upcoming Events</h3>
+                <p>Check out our upcoming cricket events.</p>
+            </div>
+        </div>
     </div>
-</body>
-</html>
+
+    <script>
+        // Function to toggle signup form
